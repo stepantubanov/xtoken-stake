@@ -95,5 +95,10 @@ describe("stake-1", () => {
       getTokenBalance(provider.connection, ctx.sToken, bob.publicKey),
     ]);
     expect(sTokenAccounts2).to.have.members([1_000, 0_000]);
+
+    // Alice has 1_000 tokens staked, so trying to untake 2_000 is unsound
+    // and should be rejected.
+    // const unsoundTx = await unstake(program, ctx, alice, 2_000);
+    // await provider.connection.confirmTransaction(unsoundTx);
   });
 });
